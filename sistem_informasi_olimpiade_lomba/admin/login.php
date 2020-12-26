@@ -90,7 +90,7 @@ include '../koneksi.php'; // memanggil file 'koneksi.php'
 
                                 </div>
                                 <div class="card-footer text-center">
-                                    <div class="small"><a href="register.html">Daftar menjadi admin? klik disini!</a></div>
+                                    <div class="small"><a href="register.php">Daftar menjadi admin? klik disini!</a></div>
                                 </div>
                             </div>
                         </div>
