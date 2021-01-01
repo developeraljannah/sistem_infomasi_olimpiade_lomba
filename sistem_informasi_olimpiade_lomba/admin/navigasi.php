@@ -10,7 +10,7 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Data Guru Pendamping
                             </a>
-                            <a class="nav-link" href="index.html">
+                            <a class="nav-link" href="data_juri/lihat_juri.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Data Juri
                             </a>
@@ -29,10 +29,6 @@
                             <a class="nav-link" href="index.html">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Data Siswa
-                            </a>
-                            <a class="nav-link" href="logout.php">
-                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Logout
                             </a>
                         </div>
                     </div>
