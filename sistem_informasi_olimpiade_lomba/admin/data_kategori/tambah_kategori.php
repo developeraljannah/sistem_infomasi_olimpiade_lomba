@@ -55,54 +55,43 @@ if ($_SESSION['kondisi'] != "login") {
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid">
-                    <h1 class="mt-4">Ubah Kompetisi</h1>
+                    <h1 class="mt-4">Tambah Kategori</h1>
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active">Halaman untuk memperbarui informasi data kompetisi</li>
+                        <li class="breadcrumb-item active">Halaman untuk menambahkan data kategori</li>
                     </ol>
                     <div class="row">
                         <div class="card-body">
-
-                            <!-- Ambil data dari url -->
-                            <?php
-                            // koneksi ke database
-                            include "../../koneksi.php";
-                            // ambil id dari url
-                            $idkompetisi = $_GET['id_kompetisi'];
-                            $caridata = mysqli_query($koneksi, "SELECT tb_kompetisi.id_kompetisi, tb_kompetisi.nama_kompetisi, tb_kompetisi.id_kategori, tb_kategori.nama_kategori FROM tb_kompetisi, tb_kategori WHERE tb_kompetisi.id_kategori = tb_kategori.id_kategori AND id_kompetisi = '$idkompetisi'");
-                            $data = mysqli_fetch_array($caridata);
-                            $id_kompetisi = $data['id_kompetisi'];
-                            $nama_kompetisi = $data['nama_kompetisi'];
-                            $id_kategori = $data['id_kategori'];
-                            $nama_kategori = $data['nama_kategori'];
-                            ?>
-
                             <!-- Form -->
-                            <form action="perbarui_kompetisi.php" method="POST">
+                            <form action="simpan_kategori.php" method="POST">
+                            
+                            <?php
+                            // Koneksi ke database
+                            include '../../koneksi.php';
+                            // mencari id kategori dengan nilai paling besar
+                            $query = "SELECT max(id_kategori) as maxKode FROM tb_kategori";
+                            $hasil = mysqli_query($koneksi, $query);
+                            $data = mysqli_fetch_array($hasil);
+                            $idkategori = $data['maxKode'];
+
+                            $noUrut = (int) substr($idkategori, 3, 2);
+
+                            // bilangan yang diambil ini ditambah 1 untuk menentukan nomor urut berikutnya
+                            $noUrut++; 
+
+                            $char = "IKA";
+                            $idkategori = $char . sprintf("%02s", $noUrut);
+
+                            ?>
                                 <div class="form-group">
-                                    <label>ID Kompetisi</label>
-                                    <input type="text" class="form-control" name="id_kompetisi" value="<?php echo $id_kompetisi; ?>" readonly>
+                                    <label>ID Kategori</label>
+                                    <input type="text" class="form-control" name="id_kategori" value="<?php echo $idkategori; ?>" readonly>
                                 </div>
                                 <div class="form-group">
-                                    <label>Nama Kompetisi</label>
-                                    <input type="text" class="form-control" name="nama_kompetisi" value="<?php echo $nama_kompetisi; ?>" required>
+                                    <label>Nama Kategori</label>
+                                    <input type="text" class="form-control" name="nama_kategori" placeholder="Ketikkan Nama Juri" required>
                                 </div>
-                                <div class="form-group">
-                                    <select name="id_kategori" class="form-control">
-                                        <option value="<?php echo $id_kategori; ?>"><?php echo $nama_kategori; ?></option>
-                                        <option value="">= Pilih Kategori =</option>
-                                        <?php
-                                        // melihat isi dari tabel kategori
-                                        $qrykategori = mysqli_query($koneksi, "SELECT * FROM tb_kategori");
-                                        while ($datakategori = mysqli_fetch_array($qrykategori)) {
-                                            $idkategori = $datakategori['id_kategori'];
-                                            $namakategori = $datakategori['nama_kategori'];
-                                        ?>
-                                            <option value="<?php echo $idkategori; ?>"><?php echo $namakategori; ?></option>
-                                        <?php } ?>
-                                    </select>
-                                </div>
-                                <input type="submit" name="ubah" value="Perbarui" class="btn btn-success navbar-btn">&nbsp;
-                                <a href="lihat_kompetisi.php" class="btn btn-info navbar-btn">Kembali</a>
+                                <input type="submit" name="tambah" value="Simpan" class="btn btn-success navbar-btn">&nbsp;
+                                <a href="lihat_kategori.php" class="btn btn-info navbar-btn">Kembali</a>
                             </form>
                             <!-- Tutup Form -->
                         </div>

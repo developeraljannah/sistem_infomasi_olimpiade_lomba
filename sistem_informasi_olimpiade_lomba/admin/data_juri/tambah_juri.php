@@ -63,9 +63,29 @@ if ($_SESSION['kondisi'] != "login") {
                         <div class="card-body">
                             <!-- Form -->
                             <form action="simpan_juri.php" method="POST">
+                            
+                            <?php
+                                // Koneksi ke database
+                                include '../../koneksi.php';
+                                // mencari id juri dengan nilai paling besar
+                                $query = "SELECT max(id_juri) as maxKode FROM tb_juri";
+                                $hasil = mysqli_query($koneksi, $query);
+                                $data = mysqli_fetch_array($hasil);
+                                $idjuri = $data['maxKode'];
+
+                                $noUrut = (int) substr($idjuri, 2, 2);
+
+                                // bilangan yang diambil ini ditambah 1 untuk menentukan nomor urut berikutnya
+                                $noUrut++;
+
+                                $char = "IJ";
+                                $idjuri = $char . sprintf("%02s", $noUrut);
+
+                                ?>
+
                                 <div class="form-group">
                                     <label>ID Juri</label>
-                                    <input type="text" class="form-control" name="id_juri" placeholder="Ketikkan ID Juri" required>
+                                    <input type="text" class="form-control" name="id_juri" value="<?php echo $idjuri; ?>" readonly>
                                 </div>
                                 <div class="form-group">
                                     <label>Nama Juri</label>

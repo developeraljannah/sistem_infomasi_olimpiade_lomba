@@ -21,7 +21,7 @@ if ($_SESSION['kondisi'] != "login") {
 
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-        <a class="navbar-brand" href="home.php">Admin Panel</a>
+        <a class="navbar-brand" href="index.html">Admin Panel</a>
         <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
 
         <!-- Navbar-->
@@ -81,7 +81,7 @@ if ($_SESSION['kondisi'] != "login") {
                                     <input type="text" class="form-control" name="id_kelas" value="<?php echo $id_kelas; ?>" readonly>
                                 </div>
                                 <div class="form-group">
-                                    <label>Nama kelas</label>
+                                    <label>Nama Kelas</label>
                                     <input type="text" class="form-control" name="nama_kelas" value="<?php echo $nama_kelas; ?>" required>
                                 </div>
                                 <input type="submit" name="ubah" value="Perbarui" class="btn btn-success navbar-btn">&nbsp;

@@ -21,7 +21,7 @@ if ($_SESSION['kondisi'] != "login") {
 
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-        <a class="navbar-brand" href="home.php">Admin Panel</a>
+        <a class="navbar-brand" href="index.html">Admin Panel</a>
         <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
 
         <!-- Navbar-->
@@ -63,13 +63,33 @@ if ($_SESSION['kondisi'] != "login") {
                         <div class="card-body">
                             <!-- Form -->
                             <form action="simpan_kelas.php" method="POST">
+
+                                <?php
+                                // Koneksi ke database
+                                include '../../koneksi.php';
+                                // mencari id kategori dengan nilai paling besar
+                                $query = "SELECT max(id_kelas) as maxKode FROM tb_kelas";
+                                $hasil = mysqli_query($koneksi, $query);
+                                $data = mysqli_fetch_array($hasil);
+                                $idkelas = $data['maxKode'];
+
+                                $noUrut = (int) substr($idkelas, 3, 2);
+
+                                // bilangan yang diambil ini ditambah 1 untuk menentukan nomor urut berikutnya
+                                $noUrut++;
+
+                                $char = "IKE";
+                                $idkelas = $char . sprintf("%02s", $noUrut);
+
+                                ?>
+
                                 <div class="form-group">
                                     <label>ID Kelas</label>
-                                    <input type="text" class="form-control" name="id_kelas" placeholder="Ketikkan ID Kelas" required>
+                                    <input type="text" class="form-control" name="id_kelas" value="<?php echo $idkelas; ?>" readonly>
                                 </div>
                                 <div class="form-group">
-                                    <label>Nama kelas</label>
-                                    <input type="text" class="form-control" name="nama_kelas" placeholder="Ketikkan Nama kelas" required>
+                                    <label>Nama Kelas</label>
+                                    <input type="text" class="form-control" name="nama_kelas" placeholder="Ketikkan Nama Juri" required>
                                 </div>
                                 <input type="submit" name="tambah" value="Simpan" class="btn btn-success navbar-btn">&nbsp;
                                 <a href="lihat_kelas.php" class="btn btn-info navbar-btn">Kembali</a>

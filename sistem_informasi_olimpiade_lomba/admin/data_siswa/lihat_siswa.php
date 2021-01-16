@@ -70,6 +70,7 @@ if ($_SESSION['kondisi'] != "login") {
                                             <th>NIS</th>
                                             <th>Nama Siswa</th>
                                             <th>Nama Kelas</th>
+                                            <th>Tempat Lahir</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -79,7 +80,7 @@ if ($_SESSION['kondisi'] != "login") {
                                         include "../../koneksi.php";
 
                                         // perintah SQL
-                                        $lihatsiswa = mysqli_query($koneksi, "SELECT tb_siswa.nisn, tb_siswa.nis, tb_siswa.nama_siswa, tb_kelas.nama_kelas FROM tb_siswa, tb_kelas WHERE tb_siswa.id_kelas = tb_kelas.id_kelas");
+                                        $lihatsiswa = mysqli_query($koneksi, "SELECT tb_siswa.nisn, tb_siswa.nis, tb_siswa.nama_siswa, tb_kelas.nama_kelas, tb_siswa.tempat_lahir FROM tb_siswa, tb_kelas WHERE tb_siswa.id_kelas = tb_kelas.id_kelas");
                                         
                                         // melakukan pengulangan pemanggilan data
                                         while($data = mysqli_fetch_array($lihatsiswa))
@@ -88,12 +89,14 @@ if ($_SESSION['kondisi'] != "login") {
                                             $nis = $data['nis'];
                                             $nama_siswa = $data['nama_siswa'];
                                             $nama_kelas = $data['nama_kelas'];
+                                            $tempat_lahir = $data['tempat_lahir'];
                                         ?>
                                         <tr>
                                             <td><?php echo $nisn; ?></td>
                                             <td><?php echo $nis; ?></td>
                                             <td><?php echo $nama_siswa; ?></td>
                                             <td><?php echo $nama_kelas; ?></td>
+                                            <td><?php echo $tempat_lahir; ?></td>
                                             <td><a href="ubah_siswa.php?nisn=<?php echo $data['nisn']; ?>" class="btn btn-info navbar-btn">Ubah</a>&nbsp;<a href="hapus_siswa.php?nisn=<?php echo $data['nisn']; ?>" class="btn btn-danger navbar-btn" onClick="return confirm('Hapus data dengan nama siswa : <?php echo $data['nama_siswa']; ?> ?')">Hapus</a></td>
                                         </tr>
                                         <?php } ?>

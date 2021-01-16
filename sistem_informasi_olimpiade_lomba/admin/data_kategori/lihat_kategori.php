@@ -55,19 +55,19 @@ if ($_SESSION['kondisi'] != "login") {
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid">
-                    <h1 class="mt-4">Data Kelas</h1>
+                    <h1 class="mt-4">Data Kategori</h1>
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active">Halaman untuk menampilkan informasi data kelas</li>
+                        <li class="breadcrumb-item active">Halaman untuk menampilkan informasi data kategori</li>
                     </ol>
-                    <a href="tambah_kelas.php" class="btn btn-success navbar-btn">Tambah</a>
+                    <a href="tambah_kategori.php" class="btn btn-success navbar-btn">Tambah</a>
                     <div class="row">
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>ID Kelas</th>
-                                            <th>Nama Kelas</th>
+                                            <th>ID Kategori</th>
+                                            <th>Nama Kategori</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -77,18 +77,18 @@ if ($_SESSION['kondisi'] != "login") {
                                         include "../../koneksi.php";
 
                                         // perintah SQL
-                                        $lihatkelas = mysqli_query($koneksi, "SELECT * FROM tb_kelas");
+                                        $lihatkategori = mysqli_query($koneksi, "SELECT * FROM tb_kategori");
                                         
                                         // melakukan pengulangan pemanggilan data
-                                        while($data = mysqli_fetch_array($lihatkelas))
+                                        while($data = mysqli_fetch_array($lihatkategori))
                                         {
-                                            $idkelas = $data['id_kelas'];
-                                            $namakelas = $data['nama_kelas'];
+                                            $idkategori = $data['id_kategori'];
+                                            $namakategori = $data['nama_kategori'];
                                         ?>
                                         <tr>
-                                            <td><?php echo $idkelas; ?></td>
-                                            <td><?php echo $namakelas; ?></td>
-                                            <td><a href="ubah_kelas.php?id_kelas=<?php echo $data['id_kelas']; ?>" class="btn btn-info navbar-btn">Ubah</a>&nbsp;<a href="hapus_kelas.php?id_kelas=<?php echo $data['id_kelas']; ?>" class="btn btn-danger navbar-btn" onClick="return confirm('Hapus data dengan nama kelas : <?php echo $data['nama_kelas']; ?> ?')">Hapus</a></td>
+                                            <td><?php echo $idkategori; ?></td>
+                                            <td><?php echo $namakategori; ?></td>
+                                            <td><a href="ubah_kategori.php?id_kategori=<?php echo $data['id_kategori']; ?>" class="btn btn-info navbar-btn">Ubah</a>&nbsp;<a href="hapus_kategori.php?id_kategori=<?php echo $data['id_kategori']; ?>" class="btn btn-danger navbar-btn" onClick="return confirm('Hapus data dengan nama kategori : <?php echo $data['nama_kategori']; ?> ?')">Hapus</a></td>
                                         </tr>
                                         <?php } ?>
                                     </tbody>

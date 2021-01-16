@@ -21,7 +21,7 @@ if ($_SESSION['kondisi'] != "login") {
 
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-        <a class="navbar-brand" href="home.php">Admin Panel</a>
+        <a class="navbar-brand" href="index.html">Admin Panel</a>
         <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
 
         <!-- Navbar-->
@@ -57,7 +57,7 @@ if ($_SESSION['kondisi'] != "login") {
                 <div class="container-fluid">
                     <h1 class="mt-4">Data Kompetisi</h1>
                     <ol class="breadcrumb mb-4">
-                        <li class="breadcrumb-item active">Halaman untuk menampilkan informasi kompetisi</li>
+                        <li class="breadcrumb-item active">Halaman untuk menampilkan informasi data kompetisi</li>
                     </ol>
                     <a href="tambah_kompetisi.php" class="btn btn-success navbar-btn">Tambah</a>
                     <div class="row">
@@ -68,9 +68,9 @@ if ($_SESSION['kondisi'] != "login") {
                                         <tr>
                                             <th>ID Kompetisi</th>
                                             <th>Nama Kompetisi</th>
-                                            <th>Kategori</th>
+                                            <th>Nama Kategori</th>
                                             <th>Aksi</th>
-                                                                                   </tr>
+                                        </tr>
                                     </thead>
                                     <tbody>
                                         <?php
@@ -78,20 +78,21 @@ if ($_SESSION['kondisi'] != "login") {
                                         include "../../koneksi.php";
 
                                         // perintah SQL
-                                        $lihatkompetisi = mysqli_query($koneksi, "SELECT * FROM tb_kompetisi");
-
+                                        $lihatkompetisi = mysqli_query($koneksi, "SELECT tb_kompetisi.id_kompetisi, tb_kompetisi.nama_kompetisi, tb_kategori.nama_kategori FROM tb_kompetisi, tb_kategori WHERE tb_kompetisi.id_kategori = tb_kategori.id_kategori");
+                                        
                                         // melakukan pengulangan pemanggilan data
-                                        while ($data = mysqli_fetch_array($lihatkompetisi)) {
+                                        while($data = mysqli_fetch_array($lihatkompetisi))
+                                        {
                                             $idkompetisi = $data['id_kompetisi'];
                                             $namakompetisi = $data['nama_kompetisi'];
-                                            $kategori = $data['kategori'];
+                                            $namakategori = $data['nama_kategori'];
                                         ?>
-                                            <tr>
-                                                <td><?php echo $idkompetisi; ?></td>
-                                                <td><?php echo $namakompetisi; ?></td>
-                                                <td><?php echo $kategori; ?></td>
-                                                <td><a href="ubah_kompetisi.php?id_kompetisi=<?php echo $data['id_kompetisi']; ?>" class="btn btn-info navbar-btn">Ubah</a>&nbsp;<a href="hapus_kompetisi.php?id_kompetisi=<?php echo $data['id_kompetisi']; ?>" class="btn btn-danger navbar-btn" onClick="return confirm('Hapus data dengan nama kompetisi : <?php echo $data['nama_kompetisi']; ?> ?')">Hapus</a></td>
-                                            </tr>
+                                        <tr>
+                                            <td><?php echo $idkompetisi; ?></td>
+                                            <td><?php echo $namakompetisi; ?></td>
+                                            <td><?php echo $namakategori; ?></td>
+                                            <td><a href="ubah_kompetisi.php?id_kompetisi=<?php echo $data['id_kompetisi']; ?>" class="btn btn-info navbar-btn">Ubah</a>&nbsp;<a href="hapus_kompetisi.php?id_kompetisi=<?php echo $data['id_kompetisi']; ?>" class="btn btn-danger navbar-btn" onClick="return confirm('Hapus data dengan nama kompetisi : <?php echo $data['nama_kompetisi']; ?> ?')">Hapus</a></td>
+                                        </tr>
                                         <?php } ?>
                                     </tbody>
                                 </table>
@@ -121,5 +122,4 @@ if ($_SESSION['kondisi'] != "login") {
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
     <script src="../assets/demo/datatables-demo.js"></script>
 </body>
-
 </html>
